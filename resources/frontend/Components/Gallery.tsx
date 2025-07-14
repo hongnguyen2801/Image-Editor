@@ -67,7 +67,6 @@ export default function Gallery({
                 width: "100%",
                 height: 590,
                 padding: "15px 25px",
-                right: 0,
             }}
         >
             <div

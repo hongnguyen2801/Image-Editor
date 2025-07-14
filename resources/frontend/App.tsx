@@ -3,7 +3,7 @@ import { AppProvider, Page, Layout, Card } from "@shopify/polaris";
 import ImageUpload from "./Components/ImageUpload";
 import Gallery from "./Components/Gallery";
 import { ImageRecord } from "./type";
-import ImageEditor from "./Components/ImageEditor";
+const ImageEditor = React.lazy(() => import("./Components/ImageEditor"));
 
 export default function App() {
     const [refresh, setRefresh] = useState(false);
@@ -35,14 +35,20 @@ export default function App() {
                                 reloadFlag={reloadFlag}
                             />
                             {selectedImage && (
-                                <ImageEditor
-                                    image={selectedImage}
-                                    onClose={() => setSelectedImage(null)}
-                                    onDelete={(id) => {
-                                        setReloadFlag((prev) => prev + 1);
-                                        setSelectedImage(null);
-                                    }}
-                                />
+                                <React.Suspense
+                                    fallback={
+                                        <div>Đang tải trình chỉnh sửa...</div>
+                                    }
+                                >
+                                    <ImageEditor
+                                        image={selectedImage}
+                                        onClose={() => setSelectedImage(null)}
+                                        onDelete={(id) => {
+                                            setReloadFlag((prev) => prev + 1);
+                                            setSelectedImage(null);
+                                        }}
+                                    />
+                                </React.Suspense>
                             )}
                         </Card>
                     </Layout.Section>
