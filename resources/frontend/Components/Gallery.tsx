@@ -62,7 +62,14 @@ export default function Gallery({
     }, [currentPage, totalPages]);
 
     return (
-        <div style={{ padding: "15px 25px", right: 0 }}>
+        <div
+            style={{
+                width: "100%",
+                height: 590,
+                padding: "15px 25px",
+                right: 0,
+            }}
+        >
             <div
                 style={{
                     display: "flex",
